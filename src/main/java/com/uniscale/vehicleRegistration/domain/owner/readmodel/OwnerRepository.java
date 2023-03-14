@@ -18,6 +18,10 @@ public class OwnerRepository {
         return owners.values().stream().filter(v -> Objects.equals(v.getOwnerIdentifier(), identifier)).findFirst();
     }
 
+    public Optional<Owner> findByEmail(String email){
+        return owners.values().stream().filter(v -> Objects.equals(v.getEmail(), email)).findFirst();
+    }
+
     public Owner getById(UUID identifier){
         return owners.get(identifier);
     }

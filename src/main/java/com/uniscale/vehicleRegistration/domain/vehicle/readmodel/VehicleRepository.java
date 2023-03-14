@@ -18,6 +18,14 @@ public class VehicleRepository {
        return vehicles.values().stream().filter(v -> Objects.equals(v.getVehicleIdentifier(), identifier)).findFirst();
     }
 
+    public Optional<Vehicle> findByPlateNumber(String plateNumber){
+       return vehicles.values().stream().filter(v -> Objects.equals(v.getPlateNumber(), plateNumber)).findFirst();
+    }
+
+    public List<Vehicle> findVehiclesByOwner(UUID ownerId){
+       return vehicles.values().stream().filter(v -> Objects.equals(v.getOwner(), ownerId)).toList();
+    }
+
     public Vehicle getById(UUID identifier){
         return vehicles.get(identifier);
     }

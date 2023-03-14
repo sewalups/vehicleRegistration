@@ -22,7 +22,7 @@ public class VehicleResource {
     }
 
     @PostMapping
-    public ResponseEntity<UUID> registerDrone(@RequestBody VehicleValues body) {
+    public ResponseEntity<UUID> register(@RequestBody VehicleValues body) {
         var identifier = service.addVehicle(body);
         return new ResponseEntity<>(identifier, HttpStatus.OK);
 
@@ -31,6 +31,13 @@ public class VehicleResource {
     @GetMapping(path = "/{vehicleId}/_lookup")
     public ResponseEntity<Vehicle> fetchVehicle(@PathVariable("vehicleId") UUID vehicleId) {
         var vehicle = service.fetchVehicle(vehicleId);
+        return new ResponseEntity<>(vehicle, HttpStatus.OK);
+
+    }
+
+    @GetMapping(path = "/_search")
+    public ResponseEntity<Vehicle> fetchVehicleByPlate(@RequestBody VehicleSearch body) {
+        var vehicle = service.fetchVehicleByPlate(body.plateNumber());
         return new ResponseEntity<>(vehicle, HttpStatus.OK);
 
     }

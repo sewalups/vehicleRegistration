@@ -45,6 +45,17 @@ public class VehicleService {
 
     }
 
+    public Vehicle fetchVehicleByPlate(String plateNumber){
+       return repository.findByPlateNumber(plateNumber)
+                .orElseThrow(() -> new VehicleNotFound(plateNumber));
+
+    }
+
+    public List<Vehicle> fetchVehiclesByOwner(UUID ownerId){
+       return repository.findVehiclesByOwner(ownerId);
+
+    }
+
     public Vehicle updateVehicle(UUID identifier, VehicleValues vehicle){
         fetchVehicle(identifier);
         var updatedVehicle = Vehicle.builder()
